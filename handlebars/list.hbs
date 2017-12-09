@@ -1,0 +1,22 @@
+{{#each lists}}
+<div class="board_item">
+	<div class="list">
+		<h1>{{title}}</h1>
+		<div class="cards">
+			{{#each cards}}
+			<div class="card">
+				<h2>{{title}}</h2><span class="icon_pencil"></span>
+			</div>
+			{{/each}}
+		</div>
+		<div id="new_card_form">
+			<form>
+				<input type="textarea" id="cardName">
+				<input type="submit" value="Add" class="save">
+				<div id="cancel">X</div>
+			</form>
+		</div>
+		<div class="card_form_toggle">Add a card...</div>
+	</div>
+</div>
+{{/each}}

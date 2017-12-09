@@ -1,0 +1,22 @@
+include /_mixins
+
+doctype html
+html
+	head
+		title Trello Clone
+		+stylesheet_link_tag('main')
+		+javascript_include_tag('vendor/all')
+		+javascript_include_tag('handlebars_templates')
+	body
+		block content
+		header
+			h1 Trello Clone
+		main
+			div#board
+
+		+javascript_include_tag("application")
+		+javascript_include_tag("models/card")
+		+javascript_include_tag("collections/cards", "collections/lists")
+		+javascript_include_tag("views/cardModalView", "views/listview", "views/boardView")
+		script(type="text/javascript").
+			var app = new App();

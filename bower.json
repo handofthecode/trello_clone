@@ -1,0 +1,25 @@
+{
+  "name": "trello",
+  "description": "trello clone",
+  "main": "",
+  "authors": [
+    "Tovi Newman <deartovi@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "backbone": "^1.3.3",
+    "handlebars": "^4.0.11",
+    "dragula.js": "dragula#^3.7.2",
+    "underscore": "^1.8.3"
+  }
+}

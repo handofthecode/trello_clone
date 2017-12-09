@@ -1,0 +1,130 @@
+@import "whitespace-reset-modified.css"
+@import "mixins"
+
+body
+	font normal 15px "Lucianda", Helvetica, Arial, sans-serif
+	background-color #1C67A2
+	
+	header h1
+		text-align center
+		margin 5px auto
+		font-size 30px
+		color #F5F6F5
+	#board
+		background-color #2279BF
+		height 1000px
+		.board_item
+			display inline-block
+			width 270px
+			margin 5px
+			border-radius 3px
+			vertical-align top
+			#list_form_toggle
+				background-color #1C67A2
+				padding 10px
+				color #B7D1E4
+				border-radius 3px
+				cursor pointer
+			#new_list_form,
+			#new_card_form
+				display none
+				background-color #E2E4E5
+				padding 4px
+				box()
+				input#listName
+					font-size 16px
+					color #8A9297
+					display block
+					width 100%
+					box-sizing border-box
+					background rgba(0,0,0,.05)
+					border-color #aaa
+					box-shadow inset 0 1px 8px rgba(0,0,0,.15)
+					border-radius 3px
+					padding 7px
+					outline none
+				#cancel
+					display inline-block
+					padding 10px
+					font normal 20px sans-serif,'Lucida Sans Unicode';
+					background-color inherit
+					border none
+					outline none
+					color #8A9297
+					cursor pointer
+					transition .3s
+					&:hover
+						color #555		
+
+input[type='submit']
+	width 54px
+	height 30px
+	border none
+	background-color #53A03F
+	font-weight 800
+	font-size 12px
+	color white
+	transition: .3s
+	vertical-align center
+	outline none
+	&:hover
+		background-color #407c31
+
+#lists
+	display inline-block	
+	.list
+		background-color #E2E4E5
+		padding 4px
+		border-radius 3px
+		padding 5px
+		box()
+		h1
+			padding 5px
+			display block
+			font-size 14px
+			font-weight 600
+		.card_form_toggle
+			color #4C4D4C
+			cursor pointer
+			padding 8px
+			margin 3px -5px -5px -5px
+			border-radius 3px
+			&:hover
+				text-decoration underline
+				background-color #C3C8CB
+.card
+	margin 5px 0 0 0
+	cursor pointer
+	padding 0 0 20px 0
+	margin 0 0 5px 0
+	background white url("../images/description.png") no-repeat 15px 25px / 12px 12px
+	overflow hidden
+	border-radius 3px
+	box()
+	&:hover
+		background-color #d2e4e3
+	h2
+		padding 5px
+		font-size 14px
+		font-weight 400
+		color gray
+		display inline-block
+	.icon_pencil
+		display inline-block
+		height 10px
+		width 10px
+		padding 5px
+		margin 3px 3px 0 0
+		background transparent url("../images/pencil.png") no-repeat 5px 4px / 10px 10px
+		border-radius 3px
+		float right
+		&:hover
+			background-color #C3C8CB
+		
+
+
+
+
+
+
+

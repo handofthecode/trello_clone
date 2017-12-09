@@ -1,0 +1,28 @@
+[
+	{
+		"listName": "todos",
+		"collection": [
+			{
+				"cardName": "code",
+				"description": "code for one hour."
+			},
+			{
+				"cardName": "practice music",
+				"description": "practice for 30 minutes."
+			}
+		]
+	},
+	{
+		"listName": "completed",
+		"collection": [
+			{
+				"cardName": "drink water",
+				"description": "2 glasses."
+			},
+			{
+				"cardName": "100 pushups",
+				"description": "all the way down..."
+			}
+		]
+	}
+]
