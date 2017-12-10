@@ -1,19 +1,19 @@
 {{#each lists}}
 <div class="board_item">
-	<div class="list">
+	<div class="list" data-id="{{id}}">
+		<form class="renameList">
+			<input type="text">
+			<input type="submit">
+		</form>
 		<h1>{{title}}</h1>
 		<div class="cards">
-			{{#each cards}}
-			<div class="card">
-				<h2>{{title}}</h2><span class="icon_pencil"></span>
-			</div>
-			{{/each}}
+
 		</div>
-		<div id="new_card_form">
+		<div class="new_card_form">
 			<form>
-				<input type="textarea" id="cardName">
+				<textarea></textarea>
 				<input type="submit" value="Add" class="save">
-				<div id="cancel">X</div>
+				<div class="cancel">X</div>
 			</form>
 		</div>
 		<div class="card_form_toggle">Add a card...</div>

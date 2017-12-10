@@ -4,20 +4,26 @@ var BoardView = Backbone.View.extend({
   events: {
     'click #list_form_toggle': 'newListFormToggle',
     'click #cancel': 'newListFormToggle',
-    'submit form': 'addList'
+    'submit #new_list_form form': 'addList'
   },
   newListFormToggle: function() {
-    this.listName.val();
+    this.listName.val('');
     this.listFormToggle.slideToggle();
     this.newListForm.slideToggle();
     this.listName.focus();
   },
   addList: function(e) {
     e.preventDefault();
-    if (this.listName.val()) this.collection.add({title: this.listName.val()});
+    if (this.listName.val()) this.collection.add({
+      title: this.listName.val(),
+      id: this.collection.serialID++
+    });
+    this.listName.val('');
+    this.listName.focus();
+
   },
   update: function() {
-    this.listView.render();
+    this.listsView.render();
   },
   registerListeners: function() {
     this.events = _.extend({}, Backbone.Events);
@@ -35,7 +41,7 @@ var BoardView = Backbone.View.extend({
     this.render();
     this.cacheDOM();
     this.collection = new Lists();
-    this.listView = new ListView(this.collection);
+    this.listsView = new ListsView(this.collection);
     this.registerListeners();
   }
 });

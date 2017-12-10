@@ -27,18 +27,16 @@ body #board .board_item #list_form_toggle {
   border-radius: 3px;
   cursor: pointer;
 }
-body #board .board_item #new_list_form,
-body #board .board_item #new_card_form {
+body #board .board_item #new_list_form {
   display: none;
   background-color: #e2e4e5;
   padding: 4px;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px 0 #555;
+  box-shadow: 1px 1px 3px 0 #aaa;
+  border: 1px solid #ccc;
 }
-body #board .board_item #new_list_form input#listName,
-body #board .board_item #new_card_form input#listName {
+body #board .board_item #new_list_form input#listName {
   font-size: 16px;
-  color: #8a9297;
   display: block;
   width: 100%;
   box-sizing: border-box;
@@ -49,8 +47,8 @@ body #board .board_item #new_card_form input#listName {
   padding: 7px;
   outline: none;
 }
-body #board .board_item #new_list_form #cancel,
-body #board .board_item #new_card_form #cancel {
+#cancel,
+.cancel {
   display: inline-block;
   padding: 10px;
   font: normal 20px sans-serif, 'Lucida Sans Unicode';
@@ -61,8 +59,8 @@ body #board .board_item #new_card_form #cancel {
   cursor: pointer;
   transition: 0.3s;
 }
-body #board .board_item #new_list_form #cancel:hover,
-body #board .board_item #new_card_form #cancel:hover {
+#cancel:hover,
+.cancel:hover {
   color: #555;
 }
 input[type='submit'] {
@@ -89,9 +87,11 @@ input[type='submit']:hover {
   border-radius: 3px;
   padding: 5px;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px 0 #555;
+  box-shadow: 1px 1px 3px 0 #aaa;
+  border: 1px solid #ccc;
 }
-#lists .list h1 {
+#lists .list h1,
+#lists .list input[type="text"] {
   padding: 5px;
   display: block;
   font-size: 14px;
@@ -108,6 +108,17 @@ input[type='submit']:hover {
   text-decoration: underline;
   background-color: #c3c8cb;
 }
+#lists .list textarea {
+  font-size: inherit;
+  display: block;
+  width: 250px;
+  height: 50px;
+  resize: none;
+  margin: 0 0 5px 0;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px 0 #aaa;
+  border: 1px solid #ccc;
+}
 .card {
   margin: 5px 0 0 0;
   cursor: pointer;
@@ -117,7 +128,8 @@ input[type='submit']:hover {
   overflow: hidden;
   border-radius: 3px;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px 0 #555;
+  box-shadow: 1px 1px 3px 0 #aaa;
+  border: 1px solid #ccc;
 }
 .card:hover {
   background-color: #d2e4e3;
@@ -141,4 +153,13 @@ input[type='submit']:hover {
 }
 .card .icon_pencil:hover {
   background-color: #c3c8cb;
+}
+.new_card_form {
+  display: none;
+}
+form.renameList {
+  display: none;
+}
+form.renameList input[type="submit"] {
+  display: none;
 }

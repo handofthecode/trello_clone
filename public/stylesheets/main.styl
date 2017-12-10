@@ -25,15 +25,13 @@ body
 				color #B7D1E4
 				border-radius 3px
 				cursor pointer
-			#new_list_form,
-			#new_card_form
+			#new_list_form
 				display none
 				background-color #E2E4E5
 				padding 4px
 				box()
 				input#listName
 					font-size 16px
-					color #8A9297
 					display block
 					width 100%
 					box-sizing border-box
@@ -43,19 +41,21 @@ body
 					border-radius 3px
 					padding 7px
 					outline none
-				#cancel
-					display inline-block
-					padding 10px
-					font normal 20px sans-serif,'Lucida Sans Unicode';
-					background-color inherit
-					border none
-					outline none
-					color #8A9297
-					cursor pointer
-					transition .3s
-					&:hover
-						color #555		
-
+					
+#cancel,
+.cancel
+	display inline-block
+	padding 10px
+	font normal 20px sans-serif,'Lucida Sans Unicode';
+	background-color inherit
+	border none
+	outline none
+	color #8A9297
+	cursor pointer
+	transition .3s
+	&:hover
+		color #555	
+		
 input[type='submit']
 	width 54px
 	height 30px
@@ -78,7 +78,7 @@ input[type='submit']
 		border-radius 3px
 		padding 5px
 		box()
-		h1
+		h1, input[type="text"]	
 			padding 5px
 			display block
 			font-size 14px
@@ -92,6 +92,14 @@ input[type='submit']
 			&:hover
 				text-decoration underline
 				background-color #C3C8CB
+		textarea
+			font-size inherit
+			display block
+			width 250px
+			height 50px
+			resize none
+			margin 0 0 5px 0
+			box()
 .card
 	margin 5px 0 0 0
 	cursor pointer
@@ -120,11 +128,12 @@ input[type='submit']
 		float right
 		&:hover
 			background-color #C3C8CB
-		
 
-
-
-
-
-
+.new_card_form
+	display none
+	
+form.renameList
+	display none
+	input[type="submit"]
+		display none	
 
