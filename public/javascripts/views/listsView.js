@@ -9,6 +9,36 @@ var ListsView = Backbone.View.extend({
     'submit .new_card_form form': 'addCard',
     'click .list h1': 'showListNameForm',
     'submit .renameList': 'renameList',
+    'click .icon_pencil': 'showCardNameForm',
+    'submit .renameCard': 'renameCard'
+  },
+  renameCard: function(e) {
+    e.preventDefault();
+    $form = $(e.target);
+    var listID = this.getListID(e);
+    var cardID = this.getCardID(e);
+    var title = $form.find('input[type="text"]').val();
+    if ($form.siblings('h2').html() === title) this.toggleCardNameForm(e);
+    else {
+      this.collection.get(listID).cards.get(cardID).set({title: title});
+      this.collection.trigger('change');
+    }
+  },
+  toggleCardNameForm: function(e) {
+    var $list = $(e.target).closest('.card');
+    var $title = $list.find('h2');
+    var $form = $list.find('.renameCard');
+    var $input = $form.find('input[type="text"]');
+    $title.toggle();
+    $form.toggle();
+
+    return [$title, $input];
+  },
+  showCardNameForm: function(e) {
+    var $title, $input;
+    [$title, $input] = this.toggleCardNameForm(e);
+    $input.val($title.html());
+    $input.select();
   },
   renameList: function(e) {
     e.preventDefault();

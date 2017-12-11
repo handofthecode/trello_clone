@@ -9,7 +9,7 @@ this["JST"]["card"] = Handlebars.template({"1":function(container,depth0,helpers
 
   return "<div class=\"card\" data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">	<h2>"
+    + "\">	<form class=\"renameCard\">		<input type=\"text\">		<input type=\"submit\">	</form>	<h2>"
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "</h2><span class=\"icon_pencil\"></span></div>";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

@@ -159,10 +159,12 @@ input[type='submit']:hover {
 .new_card_form {
   display: none;
 }
-form.renameList {
+form.renameList,
+form.renameCard {
   display: none;
 }
-form.renameList input[type="submit"] {
+form.renameList input[type="submit"],
+form.renameCard input[type="submit"] {
   display: none;
 }
 .cards {
