@@ -41,6 +41,13 @@ var ListsView = Backbone.View.extend({
   getListID: function(e) {
     return this.parentList(e).attr('data-id');
   },
+  parentCard: function(e) {
+    if (e.target) return $(e.target).closest('.card');
+    return $(e).closest('.card');
+  },
+  getCardID: function(e) {
+    return this.parentCard(e).attr('data-id');
+  },
   handleTextArea: function(e) {
     if (e.key === 'Enter') this.addCard(e);
   },
@@ -48,7 +55,7 @@ var ListsView = Backbone.View.extend({
     e.preventDefault();
     var title = $(e.target).closest('.list').find('textarea').val();
     var list = this.collection.get(this.getListID(e));
-    list.cards.add({title: title, id: list.serialID++})
+    list.cards.add({title: title, id: this.collection.cardSerial++})
     this.collection.trigger('change');
   },
   newCardFormToggle: function(e) {
@@ -75,18 +82,35 @@ var ListsView = Backbone.View.extend({
     this.setDragListeners();
   },
   setDragListeners: function() {
-    this.listDrags.on('drop', function(el, _, _, sibling) {
+    this.listDrags.on('drop', function(el, _, _, sib) {
       var index = -1;
       var model = this.collection.get(this.getListID(el));
       this.collection.remove(model, {silent: true});
-      if (sibling !== null) {
-        var siblingID = this.getListID(sibling);
-        var sibling = this.collection.get(siblingID)
+      if (sib !== null) {
+        var sibling = this.collection.get(this.getListID(sib))
         index = +this.collection.indexOf(sibling);
       }
 
       this.collection.add(model, {at: index, silent: true});
     }.bind(this));
+
+    this.cardDrags.on('drop', function(el, target, src, sib) {
+      var index = -1;
+      var destList = this.collection.get(this.getListID(target));
+      var list, card, sibList, sibCard;
+      [list, card] = this.getListCard(this.getListID(src), this.getCardID(el));
+      list.cards.remove(card, {silent: true});
+      if (sib !== null) {
+        [sibList, sibCard] = this.getListCard(this.getListID(sib), this.getCardID(sib));
+        index = +sibList.cards.indexOf(sibCard);
+      }
+      destList.cards.add(card, {at: index, silent: true});
+    }.bind(this));
+  },
+  getListCard: function(listID, cardID) {
+    var list = this.collection.get(listID);
+    var card = list.cards.get(cardID);
+    return [list, card];
   },
   renderCards: function(list) {
     var id = list.get('id');

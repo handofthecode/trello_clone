@@ -1,4 +1,5 @@
 var Lists = Backbone.Collection.extend({
-  serialID: 1,
+  listSerial: 1,
+  cardSerial: 1,
   model: List
 });

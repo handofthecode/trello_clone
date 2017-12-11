@@ -16,7 +16,7 @@ var BoardView = Backbone.View.extend({
     e.preventDefault();
     if (this.listName.val()) this.collection.add({
       title: this.listName.val(),
-      id: this.collection.serialID++
+      id: this.collection.listSerial++
     });
     this.listName.val('');
     this.listName.focus();
