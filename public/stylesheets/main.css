@@ -13,21 +13,22 @@ body #board {
   background-color: #2279bf;
   height: 1000px;
 }
-body #board .board_item {
+body #board .board_item,
+body #board .list {
   display: inline-block;
   width: 270px;
   margin: 5px;
   border-radius: 3px;
   vertical-align: top;
 }
-body #board .board_item #list_form_toggle {
+#list_form_toggle {
   background-color: #1c67a2;
   padding: 10px;
   color: #b7d1e4;
   border-radius: 3px;
   cursor: pointer;
 }
-body #board .board_item #new_list_form {
+#new_list_form {
   display: none;
   background-color: #e2e4e5;
   padding: 4px;
@@ -35,7 +36,7 @@ body #board .board_item #new_list_form {
   box-shadow: 1px 1px 3px 0 #aaa;
   border: 1px solid #ccc;
 }
-body #board .board_item #new_list_form input#listName {
+#new_list_form input#listName {
   font-size: 16px;
   display: block;
   width: 100%;
@@ -162,4 +163,7 @@ form.renameList {
 }
 form.renameList input[type="submit"] {
   display: none;
+}
+.cards {
+  padding: 5px 0 0 0;
 }
