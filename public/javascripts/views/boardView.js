@@ -6,6 +6,12 @@ var BoardView = Backbone.View.extend({
     'click #cancel': 'newListFormToggle',
     'submit #new_list_form form': 'addList'
   },
+  showModal: function(listCard) {
+    this.modal.show(listCard);
+  },
+  hideModal: function() {
+    this.modal.$el.hide();
+  },
   newListFormToggle: function() {
     this.listName.val('');
     this.listFormToggle.slideToggle();
@@ -28,6 +34,7 @@ var BoardView = Backbone.View.extend({
   registerListeners: function() {
     this.events = _.extend({}, Backbone.Events);
     this.events.listenTo(this.collection, 'update change', this.update.bind(this));
+    this.events.listenTo(this.listsView, 'modal', this.showModal.bind(this));
   },
   render: function() {
     this.$el.html(this.template());
@@ -42,6 +49,7 @@ var BoardView = Backbone.View.extend({
     this.cacheDOM();
     this.collection = new Lists();
     this.listsView = new ListsView(this.collection);
+    this.modal = new modalView(this.collection);
     this.registerListeners();
   }
 });

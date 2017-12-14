@@ -1,7 +1,8 @@
 @import "whitespace-reset-modified.css";
 @import "dragula.css";
 body {
-  font: normal 15px "Lucianda", Helvetica, Arial, sans-serif;
+  font: normal 14px Helvetica, Arial, sans-serif;
+  color: #333;
   background-color: #1c67a2;
 }
 body header h1 {
@@ -30,9 +31,9 @@ body #board .list {
   cursor: pointer;
 }
 #new_list_form {
-  display: none;
   background-color: #e2e4e5;
   padding: 4px;
+  display: none;
   border-radius: 3px;
   box-shadow: 1px 1px 3px 0 #aaa;
   border: 1px solid #ccc;
@@ -50,10 +51,11 @@ body #board .list {
   outline: none;
 }
 #cancel,
-.cancel {
+.cancel,
+.cancelEdit {
   display: inline-block;
   padding: 10px;
-  font: normal 20px sans-serif, 'Lucida Sans Unicode';
+  font: normal 20px 'Arial', sans-serif;
   background-color: inherit;
   border: none;
   outline: none;
@@ -62,7 +64,8 @@ body #board .list {
   transition: 0.3s;
 }
 #cancel:hover,
-.cancel:hover {
+.cancel:hover,
+.cancelEdit:hover {
   color: #555;
 }
 input[type='submit'] {
@@ -83,34 +86,33 @@ input[type='submit']:hover {
 #lists {
   display: inline-block;
 }
-#lists .list {
-  background-color: #e2e4e5;
-  padding: 4px;
+.list {
+  background-color: #e2e4e6;
   border-radius: 3px;
   padding: 5px;
   border-radius: 3px;
   box-shadow: 1px 1px 3px 0 #aaa;
   border: 1px solid #ccc;
 }
-#lists .list h1,
-#lists .list input[type="text"] {
+.list h1,
+.list input[type="text"] {
   padding: 5px;
   display: block;
   font-size: 14px;
   font-weight: 600;
 }
-#lists .list .card_form_toggle {
+.list .card_form_toggle {
   color: #4c4d4c;
   cursor: pointer;
   padding: 8px;
   margin: 3px -5px -5px -5px;
   border-radius: 3px;
 }
-#lists .list .card_form_toggle:hover {
+.list .card_form_toggle:hover {
   text-decoration: underline;
   background-color: #c3c8cb;
 }
-#lists .list textarea {
+.list textarea {
   font-size: inherit;
   display: block;
   width: 250px;
@@ -156,17 +158,81 @@ input[type='submit']:hover {
 .card .icon_pencil:hover {
   background-color: #c3c8cb;
 }
-.new_card_form {
+.hidden,
+form.renameCard,
+.new_card_form,
+#modal,
+#tint {
   display: none;
 }
-form.renameList,
-form.renameCard {
-  display: none;
+form.rename input[type="text"] {
+  background-color: transparent;
+  border: none;
+  width: 92%;
+  font-weight: 600;
 }
-form.renameList input[type="submit"],
-form.renameCard input[type="submit"] {
-  display: none;
+form.rename input[type="text"]:focus {
+  background-color: #fff;
 }
 .cards {
   padding: 5px 0 0 0;
+}
+#modal {
+  background-color: #edeff0;
+  height: 400px;
+  width: 550px;
+  position: fixed;
+  margin: auto auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px 0 #aaa;
+  border: 1px solid #ccc;
+}
+#modal section {
+  padding: 10px 10px 10px 20px;
+}
+#modal section h3 {
+  font: normal 13px Helvetica, Arial, sans-serif;
+  color: #999;
+}
+#modal section a {
+  cursor: pointer;
+  text-decoration: underline;
+}
+#modal section form.rename input[type="text"] {
+  font: 600 18px Helvetica, Arial, sans-serif;
+  color: #333;
+}
+#modal section form.rename input[type="submit"] {
+  display: none;
+}
+#modal section textarea {
+  display: block;
+  height: 100px;
+  width: 450px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px 0 #aaa;
+  border: 1px solid #ccc;
+  padding: 7px;
+  font-size: 14px;
+  lineheight: 18px;
+  resize: none;
+  background: transparent;
+  outline: none;
+}
+h3 {
+  margin: 0 0 10px 0;
+}
+#tint {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1;
 }

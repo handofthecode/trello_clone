@@ -3,7 +3,8 @@
 @import "dragula.css"
 
 body
-	font normal 15px "Lucianda", Helvetica, Arial, sans-serif
+	font normal 14px Helvetica, Arial, sans-serif
+	color #333
 	background-color #1C67A2
 	
 	header h1
@@ -27,9 +28,9 @@ body
 	border-radius 3px
 	cursor pointer
 #new_list_form
-	display none
 	background-color #E2E4E5
 	padding 4px
+	display none	
 	box()
 	input#listName
 		font-size 16px
@@ -44,10 +45,11 @@ body
 		outline none
 					
 #cancel,
-.cancel
+.cancel,
+.cancelEdit
 	display inline-block
 	padding 10px
-	font normal 20px sans-serif,'Lucida Sans Unicode';
+	font normal 20px 'Arial', sans-serif;
 	background-color inherit
 	border none
 	outline none
@@ -55,7 +57,7 @@ body
 	cursor pointer
 	transition .3s
 	&:hover
-		color #555	
+		color #555
 		
 input[type='submit']
 	width 54px
@@ -72,35 +74,34 @@ input[type='submit']
 		background-color #407c31
 
 #lists
-	display inline-block	
-	.list
-		background-color #E2E4E5
-		padding 4px
-		border-radius 3px
+	display inline-block
+.list
+	background-color #E2E4E6
+	border-radius 3px
+	padding 5px
+	box()
+	h1, input[type="text"]	
 		padding 5px
+		display block
+		font-size 14px
+		font-weight 600
+	.card_form_toggle
+		color #4C4D4C
+		cursor pointer
+		padding 8px
+		margin 3px -5px -5px -5px
+		border-radius 3px
+		&:hover
+			text-decoration underline
+			background-color #C3C8CB
+	textarea
+		font-size inherit
+		display block
+		width 250px
+		height 50px
+		resize none
+		margin 0 0 5px 0
 		box()
-		h1, input[type="text"]	
-			padding 5px
-			display block
-			font-size 14px
-			font-weight 600
-		.card_form_toggle
-			color #4C4D4C
-			cursor pointer
-			padding 8px
-			margin 3px -5px -5px -5px
-			border-radius 3px
-			&:hover
-				text-decoration underline
-				background-color #C3C8CB
-		textarea
-			font-size inherit
-			display block
-			width 250px
-			height 50px
-			resize none
-			margin 0 0 5px 0
-			box()
 .card
 	margin 5px 0 0 0
 	cursor pointer
@@ -130,14 +131,72 @@ input[type='submit']
 		&:hover
 			background-color #C3C8CB
 
-.new_card_form
+.hidden
+form.renameCard,
+.new_card_form,
+#modal,
+#tint
 	display none
 	
-form.renameList, form.renameCard
-	display none
-	input[type="submit"]
-		display none	
+form.rename
+	input[type="text"]
+		background-color transparent
+		border none
+		width 92%
+		font-weight 600
+	input[type="text"]:focus
+		background-color: white
 		
+
 .cards
 	padding 5px 0 0 0
+	
+#modal
+	background-color #EDEFF0
+	height 400px
+	width 550px
+	position fixed
+	margin auto auto
+	top 0
+	right 0
+	bottom 0
+	left 0
+	z-index 3
+	box()
+	section
+		padding 10px 10px 10px 20px
+		h3
+			font normal 13px Helvetica, Arial, sans-serif
+			color #999
+		a
+			cursor pointer
+			text-decoration underline
+		form.rename
+			input[type="text"]
+				font 600 18px Helvetica, Arial, sans-serif
+				color #333
+			input[type="submit"]
+				display none
+		textarea
+			display block
+			height 100px
+			width 450px
+			box()
+			padding 7px
+			font-size 14px
+			lineheight 18px
+			resize none
+			background transparent
+			outline none
+			
+h3
+	margin 0 0 10px 0
 
+#tint
+	position fixed
+	top 0
+	right 0
+	bottom 0
+	left 0
+	background rgba(0, 0, 0, .5)
+	z-index 1

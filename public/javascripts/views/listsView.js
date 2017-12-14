@@ -7,10 +7,16 @@ var ListsView = Backbone.View.extend({
     'click .cancel': 'newCardFormToggle',
     'keypress textarea': 'handleTextArea',
     'submit .new_card_form form': 'addCard',
-    'click .list h1': 'showListNameForm',
     'submit .renameList': 'renameList',
-    'click .icon_pencil': 'showCardNameForm',
-    'submit .renameCard': 'renameCard'
+    'submit .renameCard': 'renameCard',
+    'click .card': 'modal',
+    'click .icon_pencil': 'editCardTitle'
+  },
+  editCardTitle: function() {
+    // TODO //
+  },
+  modal: function(e) {
+    this.trigger('modal', this.getListCard(e));
   },
   renameCard: function(e) {
     e.preventDefault();
@@ -24,22 +30,6 @@ var ListsView = Backbone.View.extend({
       this.collection.trigger('change');
     }
   },
-  toggleCardNameForm: function(e) {
-    var $list = $(e.target).closest('.card');
-    var $title = $list.find('h2');
-    var $form = $list.find('.renameCard');
-    var $input = $form.find('input[type="text"]');
-    $title.toggle();
-    $form.toggle();
-
-    return [$title, $input];
-  },
-  showCardNameForm: function(e) {
-    var $title, $input;
-    [$title, $input] = this.toggleCardNameForm(e);
-    $input.val($title.html());
-    $input.select();
-  },
   renameList: function(e) {
     e.preventDefault();
     $form = $(e.target);
@@ -47,22 +37,6 @@ var ListsView = Backbone.View.extend({
     var title = $form.find('input[type="text"]').val();
     if ($form.siblings('h1').html() === title) this.toggleListNameForm(e);
     else this.collection.get(id).set({title: title});
-  },
-  toggleListNameForm: function(e) {
-    var $list = $(e.target).closest('.list');
-    var $title = $list.find('h1');
-    var $form = $list.find('.renameList');
-    var $input = $form.find('input[type="text"]');
-    $title.toggle();
-    $form.toggle();
-
-    return [$title, $input];
-  },
-  showListNameForm: function(e) {
-    var $title, $input;
-    [$title, $input] = this.toggleListNameForm(e);
-    $input.val($title.html());
-    $input.select();
   },
   parentList: function(e) {
     if (e.target) return $(e.target).closest('.list');
@@ -100,15 +74,16 @@ var ListsView = Backbone.View.extend({
     this.$el.html(this.listsTemplate({ lists: this.collection.toJSON() }));
     this.collection.forEach(list => this.renderCards(list));
     this.setDrags();
-  },
+  }, // DRAGULA //
   setDrags: function() {
-    var isCard = {
-      invalid: function (target) {
-        return !!$(target).closest('.card').length;
-      }
+    var isList = {
+      moves: function (el, src, handle, sib) {
+        return !$(handle).closest('.card').length;
+      },
+      direction: 'horizontal'
     }
-    this.listDrags = dragula([this.el, this.el], isCard);
-    this.cardDrags = dragula($('.cards').toArray());
+    this.listDrags = dragula([this.el], isList);
+    this.cardDrags = dragula($('.cards').toArray(), {direction: 'vertical'});
     this.setDragListeners();
   },
   setDragListeners: function() {
@@ -128,16 +103,18 @@ var ListsView = Backbone.View.extend({
       var index = -1;
       var destList = this.collection.get(this.getListID(target));
       var list, card, sibList, sibCard;
-      [list, card] = this.getListCard(this.getListID(src), this.getCardID(el));
+      [list, card] = this.getListCard(src);
       list.cards.remove(card, {silent: true});
       if (sib !== null) {
-        [sibList, sibCard] = this.getListCard(this.getListID(sib), this.getCardID(sib));
+        [sibList, sibCard] = this.getListCard(sib);
         index = +sibList.cards.indexOf(sibCard);
       }
       destList.cards.add(card, {at: index, silent: true});
     }.bind(this));
   },
-  getListCard: function(listID, cardID) {
+  getListCard: function(e) {
+    var cardID = this.getCardID(e);
+    var listID = this.getListID(e);
     var list = this.collection.get(listID);
     var card = list.cards.get(cardID);
     return [list, card];

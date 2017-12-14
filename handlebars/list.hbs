@@ -1,10 +1,9 @@
 {{#each lists}}
 <div class="list" data-id="{{id}}">
-	<form class="renameList">
-		<input type="text">
-		<input type="submit">
+	<form class="rename">
+		<input type="text" value="{{title}}">
+		<input type="submit" class="hidden">
 	</form>
-	<h1>{{title}}</h1>
 	<div class="cards">
 
 	</div>
@@ -12,7 +11,7 @@
 		<form>
 			<textarea></textarea>
 			<input type="submit" value="Add" class="save">
-			<div class="cancel">X</div>
+			<div class="cancel">x</div>
 		</form>
 	</div>
 	<div class="card_form_toggle">Add a card...</div>
