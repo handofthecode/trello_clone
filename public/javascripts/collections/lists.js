@@ -6,7 +6,6 @@ var Lists = Backbone.Collection.extend({
     $.get('board', this.success.bind(this));
   },
   saveData: function() {
-    console.log('post Request!')
     $.post('board', this.JSONify(), null, 'json');
   },
   JSONify: function() {

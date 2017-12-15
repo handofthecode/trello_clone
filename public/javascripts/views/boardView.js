@@ -27,7 +27,7 @@ var BoardView = Backbone.View.extend({
     this.listName.val('');
     this.listName.focus();
   },
-  update: function() {
+  update: function(e) {
     this.listsView.render();
     this.setWidth();
     this.collection.saveData();
@@ -38,7 +38,7 @@ var BoardView = Backbone.View.extend({
       this.$el.css({width: width + 'px'});
   },
   registerListeners: function() {
-    this.listenTo(this.collection, 'update change reset add', this.update.bind(this));
+    this.listenTo(this.collection, 'update reset change:title', this.update.bind(this));
     this.listenTo(this.listsView, 'modal', this.showModal.bind(this));
   },
   render: function() {
