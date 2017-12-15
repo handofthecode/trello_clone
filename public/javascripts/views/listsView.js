@@ -27,10 +27,10 @@ var ListsView = Backbone.View.extend({
     if ($form.siblings('h2').html() === title) this.toggleCardNameForm(e);
     else {
       this.collection.get(listID).cards.get(cardID).set({title: title});
-      this.collection.trigger('change');
     }
   },
   renameList: function(e) {
+    e.stopPropagation();
     e.preventDefault();
     $form = $(e.target);
     var id = this.getListID(e);
@@ -59,8 +59,8 @@ var ListsView = Backbone.View.extend({
     e.preventDefault();
     var title = $(e.target).closest('.list').find('textarea').val();
     var list = this.collection.get(this.getListID(e));
-    list.cards.add({title: title, id: this.collection.cardSerial++})
-    this.collection.trigger('change');
+    list.cards.add({title: title, id: this.collection.cardSerial++});
+    list.set('cards', list.cards);
   },
   newCardFormToggle: function(e) {
     var $formToggle = this.parentList(e).find('.card_form_toggle');
@@ -103,17 +103,19 @@ var ListsView = Backbone.View.extend({
       var index = -1;
       var destList = this.collection.get(this.getListID(target));
       var list, card, sibList, sibCard;
-      [list, card] = this.getListCard(src);
+      [list, card] = this.getListCard(src, el);
       list.cards.remove(card, {silent: true});
+      list.set('cards', list.cards);
       if (sib !== null) {
         [sibList, sibCard] = this.getListCard(sib);
         index = +sibList.cards.indexOf(sibCard);
       }
       destList.cards.add(card, {at: index, silent: true});
+      destList.set('cards', destList.cards);
     }.bind(this));
   },
-  getListCard: function(e) {
-    var cardID = this.getCardID(e);
+  getListCard: function(e, el) {
+    var cardID = this.getCardID(el || e);
     var listID = this.getListID(e);
     var list = this.collection.get(listID);
     var card = list.cards.get(cardID);

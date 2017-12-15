@@ -1,26 +1,49 @@
 @import "whitespace-reset-modified.css"
 @import "mixins"
 @import "dragula.css"
-
 body
 	font normal 14px Helvetica, Arial, sans-serif
 	color #333
 	background-color #1C67A2
-	
-	header h1
-		text-align center
-		margin 5px auto
-		font-size 30px
-		color #F5F6F5
-	#board
-		background-color #2279BF
-		height 1000px
-		.board_item, .list
-			display inline-block
-			width 270px
-			margin 5px
-			border-radius 3px
-			vertical-align top
+	min-width 900px
+	header
+		position fixed
+		z-index 1
+		background-color #1C67A2
+		h1
+			top 0
+			left 42%
+			position fixed
+			font-size 30px
+			color #F5F6F5
+		#search
+			color #333
+			width 150px
+			top 7px
+			left 10px
+			position fixed
+			padding 5px
+			background-color #4C92C0
+			outline none
+			border none
+			border-radius 2px
+			transition .3s
+			&:hover
+				background-color #66A2C9
+			&:focus
+				background-color white
+				width 200px
+				
+#board
+	background-color #2279BF
+	height calc(100vh - 40px)
+	box-sizing border-box
+	margin-top 40px
+	.board_item, .list
+		display inline-block
+		width 270px
+		margin 5px
+		vertical-align top
 #list_form_toggle
 	background-color #1C67A2
 	padding 10px
@@ -75,10 +98,11 @@ input[type='submit']
 
 #lists
 	display inline-block
+
 .list
 	background-color #E2E4E6
-	border-radius 3px
 	padding 5px
+	box-sizing border-box
 	box()
 	h1, input[type="text"]	
 		padding 5px
@@ -112,7 +136,7 @@ input[type='submit']
 	border-radius 3px
 	box()
 	&:hover
-		background-color #d2e4e3
+		background-color #EDEFF0
 	h2
 		padding 5px
 		font-size 14px
@@ -200,3 +224,4 @@ h3
 	left 0
 	background rgba(0, 0, 0, .5)
 	z-index 1
+

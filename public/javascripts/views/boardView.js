@@ -26,15 +26,20 @@ var BoardView = Backbone.View.extend({
     });
     this.listName.val('');
     this.listName.focus();
-
   },
   update: function() {
     this.listsView.render();
+    this.setWidth();
+    this.collection.saveData();
+  },
+  setWidth: function() {
+    if (this.collection.length < 3) return;
+      var width = (this.collection.length + 1) * 280;
+      this.$el.css({width: width + 'px'});
   },
   registerListeners: function() {
-    this.events = _.extend({}, Backbone.Events);
-    this.events.listenTo(this.collection, 'update change', this.update.bind(this));
-    this.events.listenTo(this.listsView, 'modal', this.showModal.bind(this));
+    this.listenTo(this.collection, 'update change reset add', this.update.bind(this));
+    this.listenTo(this.listsView, 'modal', this.showModal.bind(this));
   },
   render: function() {
     this.$el.html(this.template());
@@ -51,5 +56,6 @@ var BoardView = Backbone.View.extend({
     this.listsView = new ListsView(this.collection);
     this.modal = new modalView(this.collection);
     this.registerListeners();
+    this.collection.loadData();
   }
 });

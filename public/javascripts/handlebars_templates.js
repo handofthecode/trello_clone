@@ -23,7 +23,7 @@ this["JST"]["list"] = Handlebars.template({"1":function(container,depth0,helpers
 
   return "<div class=\"list\" data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">	<form class=\"rename\">		<input type=\"text\" value=\""
+    + "\">	<form class=\"rename renameList\">		<input type=\"text\" value=\""
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "\">		<input type=\"submit\" class=\"hidden\">	</form>	<div class=\"cards\">	</div>	<div class=\"new_card_form\">		<form>			<textarea></textarea>			<input type=\"submit\" value=\"Add\" class=\"save\">			<div class=\"cancel\">x</div>		</form>	</div>	<div class=\"card_form_toggle\">Add a card...</div></div>";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

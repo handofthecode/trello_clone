@@ -4,23 +4,51 @@ body {
   font: normal 14px Helvetica, Arial, sans-serif;
   color: #333;
   background-color: #1c67a2;
+  min-width: 900px;
+}
+body header {
+  position: fixed;
+  z-index: 1;
+  background-color: #1c67a2;
 }
 body header h1 {
-  text-align: center;
-  margin: 5px auto;
+  top: 0;
+  left: 42%;
+  position: fixed;
   font-size: 30px;
   color: #f5f6f5;
 }
-body #board {
-  background-color: #2279bf;
-  height: 1000px;
+body header #search {
+  color: #333;
+  width: 150px;
+  top: 7px;
+  left: 10px;
+  position: fixed;
+  padding: 5px;
+  background-color: #4c92c0;
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  transition: 0.3s;
 }
-body #board .board_item,
-body #board .list {
+body header #search:hover {
+  background-color: #66a2c9;
+}
+body header #search:focus {
+  background-color: #fff;
+  width: 200px;
+}
+#board {
+  background-color: #2279bf;
+  height: calc(100vh - 40px);
+  box-sizing: border-box;
+  margin-top: 40px;
+}
+#board .board_item,
+#board .list {
   display: inline-block;
   width: 270px;
   margin: 5px;
-  border-radius: 3px;
   vertical-align: top;
 }
 #list_form_toggle {
@@ -88,8 +116,8 @@ input[type='submit']:hover {
 }
 .list {
   background-color: #e2e4e6;
-  border-radius: 3px;
   padding: 5px;
+  box-sizing: border-box;
   border-radius: 3px;
   box-shadow: 1px 1px 3px 0 #aaa;
   border: 1px solid #ccc;
@@ -136,7 +164,7 @@ input[type='submit']:hover {
   border: 1px solid #ccc;
 }
 .card:hover {
-  background-color: #d2e4e3;
+  background-color: #edeff0;
 }
 .card h2 {
   padding: 5px;

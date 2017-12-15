@@ -21,7 +21,6 @@ var modalView = Backbone.View.extend({
   renameCard: function(e) {
     e.preventDefault();
     this.listCard[1].set('title', this.$title.val());
-    this.collection.trigger('update');
     this.$title.blur();
   },
   showForm: function(e) {
