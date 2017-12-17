@@ -49,10 +49,10 @@ var BoardView = Backbone.View.extend({
     this.listName = this.$('#listName');
     this.listFormToggle = this.$('#list_form_toggle');
   },
-  initialize: function() {
+  initialize: function(collection) {
     this.render();
     this.cacheDOM();
-    this.collection = new Lists();
+    this.collection = collection;
     this.listsView = new ListsView(this.collection);
     this.modal = new modalView(this.collection);
     this.registerListeners();

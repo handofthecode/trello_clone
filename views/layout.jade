@@ -10,7 +10,9 @@ html
 	body
 		block content
 		header
-			input#search(type="text")
+			#search
+				input(type="text")
+				#results
 			h1 Trello Clone
 		main
 			div#board
@@ -18,6 +20,6 @@ html
 		+javascript_include_tag("application")
 		+javascript_include_tag("models/card")
 		+javascript_include_tag("collections/cards", "collections/lists")
-		+javascript_include_tag("views/modalView", "views/listsView", "views/boardView")
+		+javascript_include_tag("views/modalView", "views/listsView", "views/boardView", "views/searchView")
 		script(type="text/javascript").
 			var app = new App();

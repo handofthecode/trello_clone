@@ -11,14 +11,25 @@ body header {
   z-index: 1;
   background-color: #1c67a2;
 }
-body header h1 {
+body header > h1 {
   top: 0;
   left: 42%;
   position: fixed;
   font-size: 30px;
   color: #f5f6f5;
 }
-body header #search {
+body header #search #results {
+  display: none;
+  padding: 15px 100px 15px 15px;
+  background-color: #edeff0;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px 0 #aaa;
+  border: 1px solid #ccc;
+}
+body header #search #results h1 {
+  padding-bottom: 5px;
+}
+body header #search input {
   color: #333;
   width: 150px;
   top: 7px;
@@ -31,10 +42,10 @@ body header #search {
   border-radius: 2px;
   transition: 0.3s;
 }
-body header #search:hover {
+body header #search input:hover {
   background-color: #66a2c9;
 }
-body header #search:focus {
+body header #search input:focus {
   background-color: #fff;
   width: 200px;
 }

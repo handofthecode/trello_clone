@@ -61,8 +61,7 @@ var ListsView = Backbone.View.extend({
     var title = $(e.target).closest('.list').find('textarea').val();
     var list = this.collection.get(this.getListID(e));
     list.cards.add({title: title, id: this.collection.cardSerial++}, {silent: true});
-    list.set('cards', list.cards, {silent: true});
-    this.collection.trigger('update');
+    list.setCards();
   },
   newCardFormToggle: function(e) {
     var $formToggle = this.parentList(e).find('.card_form_toggle');
@@ -113,9 +112,8 @@ var ListsView = Backbone.View.extend({
         [sibList, sibCard] = this.getListCard(sib);
         index = +sibList.cards.indexOf(sibCard);
       }
-      destList.cards.add(card, {at: index, silent: true});
-      destList.set('cards', destList.cards);
-      this.collection.trigger('update');
+      destList.cards.add(card, {at: index});
+      destList.setCards();
     }.bind(this));
   },
   getListCard: function(e, el) {

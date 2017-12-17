@@ -2,9 +2,13 @@ var List = Backbone.Model.extend({
   updateLists: function() {
     this.collection.trigger('update');
   },
+  setCards: function() {
+    this.set('cards', this.cards);
+    this.updateLists();
+  },
   initialize: function(list) {
     this.cards = new Cards(list.cards);
-    this.listenTo(this.cards, 'update change reset add', this.updateLists.bind(this))
+    // this.listenTo(this.cards, 'update change reset add', this.updateLists.bind(this))
   }
 });
 
