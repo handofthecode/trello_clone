@@ -9,18 +9,22 @@ var SearchView = Backbone.View.extend({
     this.$results.slideUp();
   },
   renderResults: function() {
-    console.log('test');
-    var query = this.$input.val();
-    var matches = this.findCards(query);
-    this.render(matches);
-    this.$results.slideDown();
+    var query = this.$input.val().toLowerCase();
+    if (query) {
+      var matches = this.findCards(query);
+      this.render(matches);
+      this.$results.slideDown();
+    } else {
+      this.hideResults();
+    }
   },
   findCards: function(query) {
     var matches = [];
     this.collection.toJSON().forEach(list => {
       if (list.cards) {
         list.cards.forEach(card => {
-          if (card.description && card.description.includes(query) || card.title.includes(query)) {
+          if (card.description && card.description.toLowerCase().includes(query) || 
+              card.title.toLowerCase().includes(query)) {
             matches.push(card);
           }
         });
