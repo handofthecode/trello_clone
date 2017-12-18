@@ -1,11 +1,11 @@
-/*.gu-mirror {
+.gu-mirror {
   position: fixed !important;
   margin: 0 !important;
-  z-index: 9999 !important;
-  opacity: 0.5;
+  z-index: 11 !important;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-  filter: alpha(opacity=80);
-}*/
+  transform: rotate(5deg);
+/*  filter: alpha(opacity=80);
+*/}
 .gu-hide {
   display: none !important;
 }

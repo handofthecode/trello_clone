@@ -55,7 +55,7 @@ var BoardView = Backbone.View.extend({
     this.collection = collection;
     this.listsView = new ListsView(this.collection);
     this.modal = new modalView(this.collection);
-    this.registerListeners();
     this.collection.loadData();
+    this.registerListeners();
   }
 });
