@@ -83,8 +83,10 @@ var ListsView = Backbone.View.extend({
       var destList = this.collection.get(this.getListID(target));
       var list, card, sibList, sibCard;
       [list, card] = this.getListCard(src, el);
+
       list.cards.remove(card, {silent: true});
-      list.set('cards', list.cards);
+
+      list.set('cards', list.cards.toJSON());
       if (sib !== null) {
         [sibList, sibCard] = this.getListCard(sib);
         index = +sibList.cards.indexOf(sibCard);

@@ -1,10 +1,7 @@
 var List = Backbone.Model.extend({
-  updateLists: function() {
-    this.collection.trigger('update');
-  },
   setCards: function() {
     this.set('cards', this.cards.toJSON());
-    this.updateLists();
+    this.collection.trigger('update');
   },
   initialize: function(list) {
     this.cards = new Cards(list.cards);
