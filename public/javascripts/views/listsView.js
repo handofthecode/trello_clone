@@ -74,33 +74,10 @@ var ListsView = Backbone.View.extend({
   render: function() {
     this.$el.html(this.listsTemplate({ lists: this.collection.toJSON() }));
     this.collection.forEach(list => this.renderCards(list));
-    this.setDrags();
+    this.setCardDrags();
   }, // DRAGULA //
-  setDrags: function() {
-    var isList = {
-      moves: function (el, src, handle, sib) {
-        return !$(handle).closest('.card').length;
-      },
-      direction: 'horizontal'
-    }
-    this.listDrags = dragula([this.el], isList);
+  setCardDrags: function() {
     this.cardDrags = dragula($('.cards').toArray(), {direction: 'vertical'});
-    this.setDragListeners();
-  },
-  setDragListeners: function() {
-    this.listDrags.on('drop', function(el, _, _, sib) {
-      var index = -1;
-      var model = this.collection.get(this.getListID(el));
-      this.collection.remove(model, {silent: true});
-      if (sib !== null) {
-        var sibling = this.collection.get(this.getListID(sib))
-        index = +this.collection.indexOf(sibling);
-      }
-
-      this.collection.add(model, {at: index, silent: true});
-      this.collection.trigger('update');
-    }.bind(this));
-
     this.cardDrags.on('drop', function(el, target, src, sib) {
       var index = -1;
       var destList = this.collection.get(this.getListID(target));
@@ -114,6 +91,25 @@ var ListsView = Backbone.View.extend({
       }
       destList.cards.add(card, {at: index});
       destList.setCards();
+    }.bind(this));
+  },
+  setListDrags: function() {
+    var isList = {
+      moves: function (el, src, handle, sib) {
+        return !$(handle).closest('.card').length;
+      },
+      direction: 'horizontal'
+    }
+    dragula([this.el], isList).on('drop', function(el, _, _, sib) {
+      var index = -1;
+      var model = this.collection.get(this.getListID(el));
+      this.collection.remove(model, {silent: true});
+      if (sib !== null) {
+        var sibling = this.collection.get(this.getListID(sib))
+        index = +this.collection.indexOf(sibling);
+      }
+      this.collection.add(model, {at: index, silent: true});
+      this.collection.trigger('update');
     }.bind(this));
   },
   getListCard: function(e, el) {
@@ -130,5 +126,6 @@ var ListsView = Backbone.View.extend({
   },
   initialize: function(lists) {
     this.collection = lists;
+    this.setListDrags();
   }
 });
