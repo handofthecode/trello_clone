@@ -21,7 +21,7 @@ var modalView = Backbone.View.extend({
   renameCard: function(e) {
     e.preventDefault();
     this.listCard[1].set('title', this.$title.val());
-    this.listCard[0].setCards();
+    this.listCard[0].setCards('update');
     this.$title.blur();
   },
   showForm: function(e) {
@@ -32,7 +32,7 @@ var modalView = Backbone.View.extend({
   setDescription: function(e) {
     e.preventDefault();
     this.listCard[1].set('description', this.$descriptionText.val());
-    this.listCard[0].setCards();
+    this.listCard[0].setCards('update');
     this.render(this.listCard);
     this.$description.addClass('hidden');
   },

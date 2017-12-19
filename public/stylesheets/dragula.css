@@ -4,7 +4,6 @@
   z-index: 9999 !important;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
   transform: rotate(5deg);
-/*  filter: alpha(opacity=80); */
 }
 .gu-hide {
   display: none !important;

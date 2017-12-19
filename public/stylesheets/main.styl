@@ -47,14 +47,19 @@ body
 	height calc(100vh - 40px)
 	box-sizing border-box
 	margin-top 40px
+	width 100vw
+	overflow-x scroll
+	white-space nowrap
+
 	.board_item, .list
 		display inline-block
 		width 270px
-		margin 5px
+		margin 15px 5px 5px 5px
 		vertical-align top
 #list_form_toggle
 	background-color #1C67A2
 	padding 10px
+	margin-right 15px
 	color #B7D1E4
 	border-radius 3px
 	cursor pointer
@@ -184,6 +189,11 @@ form.rename
 
 .cards
 	padding 5px 0 0 0
+	max-height calc(100vh - 150px)
+	overflow-y scroll
+	
+.cards.long 
+	max-height calc(80vh + 35px)
 	
 #modal
 	background-color #EDEFF0

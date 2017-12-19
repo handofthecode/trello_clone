@@ -29,13 +29,7 @@ var BoardView = Backbone.View.extend({
   },
   update: function(e) {
     this.listsView.render();
-    this.setWidth();
     this.collection.saveData();
-  },
-  setWidth: function() {
-    if (this.collection.length < 3) return;
-      var width = (this.collection.length + 1) * 280;
-      this.$el.css({width: width + 'px'});
   },
   registerListeners: function() {
     this.listenTo(this.collection, 'update reset change:title', this.update.bind(this));

@@ -19,7 +19,8 @@ this["JST"]["card"] = Handlebars.template({"1":function(container,depth0,helpers
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.cards : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.cards : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "<div class=\"new_card_form\">	<form>		<textarea></textarea>		<input type=\"submit\" value=\"Add\" class=\"save\">		<div class=\"cancel\">x</div>	</form></div>";
 },"useData":true});
 
 this["JST"]["list"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -29,7 +30,7 @@ this["JST"]["list"] = Handlebars.template({"1":function(container,depth0,helpers
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">	<form class=\"rename renameList\">		<input type=\"text\" value=\""
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
-    + "\">		<input type=\"submit\" class=\"hidden\">	</form>	<div class=\"cards\">	</div>	<div class=\"new_card_form\">		<form>			<textarea></textarea>			<input type=\"submit\" value=\"Add\" class=\"save\">			<div class=\"cancel\">x</div>		</form>	</div>	<div class=\"card_form_toggle\">Add a card...</div></div>";
+    + "\">		<input type=\"submit\" class=\"hidden\">	</form>	<div class=\"scroll_wrap\">		<div class=\"cards\">		</div>		<div class=\"card_form_toggle\">Add a card...</div>	</div></div>";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
