@@ -5,11 +5,12 @@ body {
   color: #333;
   background-color: #1c67a2;
   min-width: 900px;
+  overflow: hidden;
 }
 body header {
   position: fixed;
   z-index: 1;
-  background-color: #1c67a2;
+  background-color: transparent;
 }
 body header > h1 {
   top: 0;
@@ -18,16 +19,36 @@ body header > h1 {
   font-size: 30px;
   color: #f5f6f5;
 }
+body header #search {
+  margin-left: 10px;
+}
 body header #search #results {
+  box-sizing: border-box;
+  width: 450px;
   display: none;
   padding: 15px 100px 15px 15px;
   background-color: #edeff0;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px 0 #aaa;
+  box-shadow: 0.5px 0.2px 0.5px 0px #aaa;
   border: 1px solid #ccc;
 }
 body header #search #results h1 {
   padding-bottom: 5px;
+}
+body header #search #results .card {
+  padding: 0 20px 0 0;
+  display: inline-block;
+  width: 170px;
+}
+body header #search #results span + .card {
+  margin-top: 15px;
+}
+body header #search #results span {
+  vertical-align: 90%;
+  margin-left: 5px;
+  display: inline-block;
+  font: normal 13px Helvetica, Arial, sans-serif;
+  color: #999;
 }
 body header #search input {
   color: #333;
@@ -54,15 +75,15 @@ body header #search input:focus {
   height: calc(100vh - 40px);
   box-sizing: border-box;
   margin-top: 40px;
-  width: 100vw;
-  overflow-x: scroll;
+  overflow-x: auto;
   white-space: nowrap;
+  border: solid 8px transparent;
 }
 #board .board_item,
 #board .list {
   display: inline-block;
   width: 270px;
-  margin: 15px 5px 5px 5px;
+  margin: 0 5px 5px 5px;
   vertical-align: top;
 }
 #list_form_toggle {
@@ -78,11 +99,11 @@ body header #search input:focus {
   padding: 4px;
   display: none;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px 0 #aaa;
+  box-shadow: 0.5px 0.2px 0.5px 0px #aaa;
   border: 1px solid #ccc;
 }
 #new_list_form input#listName {
-  font-size: 16px;
+  font-size: 14px;
   display: block;
   width: 100%;
   box-sizing: border-box;
@@ -131,10 +152,10 @@ input[type='submit']:hover {
 }
 .list {
   background-color: #e2e4e6;
-  padding: 5px;
+  padding: 2px;
   box-sizing: border-box;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px 0 #aaa;
+  box-shadow: 0.5px 0.2px 0.5px 0px #aaa;
   border: 1px solid #ccc;
 }
 .list h1,
@@ -148,7 +169,7 @@ input[type='submit']:hover {
   color: #4c4d4c;
   cursor: pointer;
   padding: 8px;
-  margin: 3px -5px -5px -5px;
+  margin: 3px -3px -3px -3px;
   border-radius: 3px;
 }
 .list .card_form_toggle:hover {
@@ -163,18 +184,17 @@ input[type='submit']:hover {
   resize: none;
   margin: 0 0 5px 0;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px 0 #aaa;
+  box-shadow: 0.5px 0.2px 0.5px 0px #aaa;
   border: 1px solid #ccc;
 }
 .card {
-  margin: 5px 0 0 0;
   cursor: pointer;
-  margin: 0 0 5px 0;
+  margin: 0 4px 5px 0;
   background: #fff;
   overflow: hidden;
   border-radius: 3px;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px 0 #aaa;
+  box-shadow: 0.5px 0.2px 0.5px 0px #aaa;
   border: 1px solid #ccc;
 }
 .card:hover {
@@ -185,7 +205,9 @@ input[type='submit']:hover {
   background: url("../images/description.png") no-repeat 12px 0/12px 12px;
 }
 .card h2 {
-  padding: 5px 0 3px 5px;
+  white-space: normal;
+  width: 220px;
+  padding: 5px 0 5px 5px;
   font-size: 14px;
   font-weight: 400;
   color: #808080;
@@ -208,8 +230,43 @@ input[type='submit']:hover {
 form.renameCard,
 .new_card_form,
 #modal,
-#tint {
+#tint,
+.tint {
   display: none;
+}
+.card.editing {
+  overflow: hidden;
+}
+.card.editing form.renameCard {
+  display: inline-block;
+  position: absolute;
+  z-index: 3;
+  cursor: default;
+}
+.card.editing form.renameCard textarea {
+  height: 80px;
+  border-radius: 3px;
+  box-shadow: 0.5px 0.2px 0.5px 0px #aaa;
+  border: 1px solid #ccc;
+}
+.card.editing form.renameCard input[type="submit"] {
+  margin-top: 20px;
+  cursor: pointer;
+  width: 75px;
+  height: 33px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.card.editing form.renameCard input.no_margin {
+  margin-top: 10px;
+}
+.card.editing form.renameCard .icon_description {
+  z-index: 5;
+  margin: -30px 0 0 7px;
+  background: url("../images/description.png") no-repeat;
+}
+.card.editing .tint {
+  display: block;
 }
 form.rename input[type="text"] {
   background-color: transparent;
@@ -220,13 +277,17 @@ form.rename input[type="text"] {
 form.rename input[type="text"]:focus {
   background-color: #fff;
 }
-.cards {
-  padding: 5px 0 0 0;
+.scroll_wrap {
+  position: relative;
+}
+.cards,
+#results {
   max-height: calc(100vh - 150px);
-  overflow-y: scroll;
+  overflow-y: auto;
+  padding: 1px 0 0 0;
 }
 .cards.long {
-  max-height: calc(80vh + 35px);
+  max-height: calc(100vh - 119px);
 }
 #modal {
   background-color: #edeff0;
@@ -240,7 +301,7 @@ form.rename input[type="text"]:focus {
   left: 0;
   z-index: 3;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px 0 #aaa;
+  box-shadow: 0.5px 0.2px 0.5px 0px #aaa;
   border: 1px solid #ccc;
 }
 #modal section {
@@ -266,7 +327,7 @@ form.rename input[type="text"]:focus {
   height: 100px;
   width: 450px;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px 0 #aaa;
+  box-shadow: 0.5px 0.2px 0.5px 0px #aaa;
   border: 1px solid #ccc;
   padding: 7px;
   font-size: 14px;
@@ -278,7 +339,8 @@ form.rename input[type="text"]:focus {
 h3 {
   margin: 0 0 10px 0;
 }
-#tint {
+#tint,
+.tint {
   position: fixed;
   top: 0;
   right: 0;
@@ -286,4 +348,56 @@ h3 {
   left: 0;
   background: rgba(0,0,0,0.5);
   z-index: 1;
+  cursor: default;
+}
+#board::-webkit-scrollbar {
+  -webkit-appearance: none;
+  height: 10px;
+}
+#board::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #66a2c9;
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,0.5);
+}
+#board::-webkit-scrollbar-track {
+  background-color: #0064a5;
+  border-radius: 3px;
+}
+.cards::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+.cards::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #c3c9cc;
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,0.5);
+}
+.cards::-webkit-scrollbar-track {
+  background-color: #d5dadc;
+  border-radius: 3px;
+}
+#results::-webkit-scrollbar {
+  -webkit-appearance: none;
+  height: 10px;
+  width: 8px;
+}
+#results::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #c3c9cc;
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,0.5);
+}
+#results::-webkit-scrollbar-track {
+  background-color: #d5dadc;
+  border-radius: 3px;
+}
+@media screen and (max-width: 500px) {
+  body header > h1 {
+    left: 60%;
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 317px) {
+  body header > h1 {
+    left: 75%;
+  }
 }

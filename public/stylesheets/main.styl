@@ -6,10 +6,11 @@ body
 	color #333
 	background-color #1C67A2
 	min-width 900px
+	overflow hidden
 	header
 		position fixed
 		z-index 1
-		background-color #1C67A2
+		background-color transparent
 		& > h1
 			top 0
 			left 42%
@@ -17,13 +18,29 @@ body
 			font-size 30px
 			color #F5F6F5
 		#search
+			margin-left 10px
 			#results
+				box-sizing border-box
+				width 450px
 				display none
 				padding 15px 100px 15px 15px
 				background-color #EDEFF0
 				box()
 				h1
 					padding-bottom 5px
+				.card
+					padding 0 20px 0 0
+					display inline-block
+					width 170px
+				span + .card
+					margin-top 15px
+				span
+					vertical-align 90%
+					margin-left 5px
+					display inline-block
+					font normal 13px Helvetica, Arial, sans-serif
+					color #999
+					
 			input
 				color #333
 				width 150px
@@ -47,14 +64,13 @@ body
 	height calc(100vh - 40px)
 	box-sizing border-box
 	margin-top 40px
-	width 100vw
-	overflow-x scroll
+	overflow-x auto
 	white-space nowrap
-
+	border solid 8px transparent 
 	.board_item, .list
 		display inline-block
 		width 270px
-		margin 15px 5px 5px 5px
+		margin 0 5px 5px 5px
 		vertical-align top
 #list_form_toggle
 	background-color #1C67A2
@@ -69,7 +85,7 @@ body
 	display none	
 	box()
 	input#listName
-		font-size 16px
+		font-size 14px
 		display block
 		width 100%
 		box-sizing border-box
@@ -114,7 +130,7 @@ input[type='submit']
 
 .list
 	background-color #E2E4E6
-	padding 5px
+	padding 2px
 	box-sizing border-box
 	box()
 	h1, input[type="text"]	
@@ -126,7 +142,7 @@ input[type='submit']
 		color #4C4D4C
 		cursor pointer
 		padding 8px
-		margin 3px -5px -5px -5px
+		margin 3px -3px -3px -3px
 		border-radius 3px
 		&:hover
 			text-decoration underline
@@ -140,9 +156,8 @@ input[type='submit']
 		margin 0 0 5px 0
 		box()
 .card
-	margin 5px 0 0 0
 	cursor pointer
-	margin 0 0 5px 0
+	margin 0 4px 5px 0
 	background white
 	overflow hidden
 	border-radius 3px
@@ -153,7 +168,9 @@ input[type='submit']
 		padding 5px 0 15px 5px
 		background url("../images/description.png") no-repeat 12px 0 / 12px 12px
 	h2
-		padding 5px 0 3px 5px
+		white-space normal
+		width 220px
+		padding 5px 0 5px 5px
 		font-size 14px
 		font-weight 400
 		color gray
@@ -174,9 +191,39 @@ input[type='submit']
 form.renameCard,
 .new_card_form,
 #modal,
-#tint
+#tint,
+.tint
 	display none
 	
+.card.editing
+	overflow hidden
+	form.renameCard
+		display inline-block
+		position absolute
+		z-index 3
+		cursor default
+		textarea
+			height 80px
+			box()
+		input[type="submit"]
+			margin-top 20px
+			cursor pointer
+			width 75px
+			height 33px
+			font-size 13px
+			font-weight 600
+		input.no_margin
+			margin-top 10px
+		.icon_description
+			z-index 5
+			margin -30px 0 0 7px
+			// padding 5px 0 15px 5px
+			background url("../images/description.png") no-repeat
+		
+
+	.tint
+		display block
+
 form.rename
 	input[type="text"]
 		background-color transparent
@@ -185,15 +232,17 @@ form.rename
 		font-weight 600
 	input[type="text"]:focus
 		background-color: white
-		
 
-.cards
-	padding 5px 0 0 0
+.scroll_wrap
+	position relative
+
+.cards, #results
 	max-height calc(100vh - 150px)
-	overflow-y scroll
-	
+	overflow-y auto
+	padding 1px 0 0 0	
+
 .cards.long 
-	max-height calc(80vh + 35px)
+	max-height calc(100vh - 119px)
 	
 #modal
 	background-color #EDEFF0
@@ -236,7 +285,7 @@ form.rename
 h3
 	margin 0 0 10px 0
 
-#tint
+#tint, .tint
 	position fixed
 	top 0
 	right 0
@@ -244,3 +293,58 @@ h3
 	left 0
 	background rgba(0, 0, 0, .5)
 	z-index 1
+	cursor default
+	
+#board::-webkit-scrollbar {
+  -webkit-appearance: none;
+  height: 10px;
+}
+
+#board::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #66A2C9;
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+#board::-webkit-scrollbar-track {
+	background-color #0064A5
+	border-radius: 3px;
+}
+
+.cards::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+
+.cards::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #C3C9CC;
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+.cards::-webkit-scrollbar-track {
+	background-color #D5DADC;
+	border-radius: 3px;
+}
+
+#results::-webkit-scrollbar {
+  -webkit-appearance: none;
+  height: 10px;
+  width: 8px;
+}
+#results::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #C3C9CC;
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+#results::-webkit-scrollbar-track {
+	background-color #D5DADC;
+	border-radius: 3px;
+}
+
+
+@media screen and (max-width 500px)
+	body header > h1
+		left 60%
+		font-size 20px
+@media screen and (max-width 317px)
+	body header > h1
+		left 75%

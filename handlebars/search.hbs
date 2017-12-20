@@ -1,6 +1,11 @@
 <h1>Cards</h1>
-{{#each cards}}
-<div class="card" data-id="{{id}}">
-	<h2>{{title}}</h2>
-</div>
-{{/each}}
+{{#if cards}}
+	{{#each cards}}
+	<div class="card" data-card-id="{{id}}" data-list-id="{{listID}}">
+		<h2>{{title}}</h2>
+	</div>
+	<span> in <strong>{{listTitle}}</strong></span>
+	{{/each}}
+{{else}}
+	<p>no matching cards to display</p>
+{{/if}}

@@ -3,20 +3,29 @@ var BoardView = Backbone.View.extend({
 	el: '#board',
   events: {
     'click #list_form_toggle': 'newListFormToggle',
-    'click #cancel': 'newListFormToggle',
+    'blur #listName': 'newListFormToggle',
     'submit #new_list_form form': 'addList'
   },
+  // isOverflow: function() {
+  //   if (e.offsetHeight < e.scrollHeight || e.offsetWidth < e.scrollWidth) {
+  //     return true;
+  //   }
+  //   return false;
+  // },
+  // checkOverflow: function() {
+  //   console.log(this.isOverflow(this.$el));
+  // },
   showModal: function(listCard) {
     this.modal.show(listCard);
   },
   hideModal: function() {
     this.modal.$el.hide();
   },
-  newListFormToggle: function() {
+  newListFormToggle: function(e) {
     this.listName.val('');
-    this.listFormToggle.slideToggle();
-    this.newListForm.slideToggle();
-    this.listName.focus();
+    this.listFormToggle.slideToggle(40);
+    this.newListForm.slideToggle(40);
+    if ($(e.target).is('#list_form_toggle')) this.listName.focus();
   },
   addList: function(e) {
     e.preventDefault();
@@ -33,7 +42,7 @@ var BoardView = Backbone.View.extend({
   },
   registerListeners: function() {
     this.listenTo(this.collection, 'update reset change:title', this.update.bind(this));
-    this.listenTo(this.listsView, 'modal', this.showModal.bind(this));
+    this.listenTo(this.collection, 'modal', this.showModal.bind(this));
   },
   render: function() {
     this.$el.html(this.template());

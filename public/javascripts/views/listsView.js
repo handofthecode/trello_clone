@@ -6,28 +6,43 @@ var ListsView = Backbone.View.extend({
     'click .card_form_toggle': 'newCardFormToggle',
     'click .cancel': 'hideCardForm',
     'blur textarea': 'hideCardForm',
-    'keypress textarea': 'handleTextArea',
+    'keypress .new_card_form textarea': 'handleNewCardEnter',
     'submit .new_card_form form': 'addCard',
     'submit .renameList': 'renameList',
     'submit .renameCard': 'renameCard',
+    'click .icon_pencil': 'openQuickEdit',
+    'click .tint': 'closeQuickEdit',
+    'click form.renameCard': 'closeQuickEdit',
     'click .card': 'modal',
-    'click .icon_pencil': 'editCardTitle'
   },
-  editCardTitle: function() {
-    // TODO //
+  closeQuickEdit: function(e) {
+    e.stopPropagation();
+    if (e.target.nodeName === 'FORM' || e.target.className === 'tint') {
+      this.parentCard(e).removeClass('editing');
+    }
   },
+  openQuickEdit: function(e) {
+    console.log(e);
+    e.stopPropagation();
+    var $card = this.parentCard(e);
+    $card.addClass('editing');
+    $card.find('textarea').val($card.find('h2').text()).focus().select();
+  },
+
   modal: function(e) {
-    this.trigger('modal', this.getListCard(e));
+    if (!this.parentCard(e).hasClass('editing')) {
+      this.collection.trigger('modal', this.getListCard(e));
+    }
   },
   renameCard: function(e) {
     e.preventDefault();
     $form = $(e.target);
-    var listID = this.getListID(e);
-    var cardID = this.getCardID(e);
-    var title = $form.find('input[type="text"]').val();
-    if ($form.siblings('h2').html() === title) this.toggleCardNameForm(e);
+    var listCard = this.getListCard(e);
+    var title = $form.find('textarea').val();
+    if ($form.siblings('h2').html() === title) this.closeQuickEdit(e);
     else {
-      this.collection.get(listID).cards.get(cardID).set({title: title});
+      listCard[1].set({title: title});
+      listCard[0].setCards('update');
     }
   },
   renameList: function(e) {
@@ -56,7 +71,7 @@ var ListsView = Backbone.View.extend({
   getCardID: function(e) {
     return this.parentCard(e).attr('data-id');
   },
-  handleTextArea: function(e) {
+  handleNewCardEnter: function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
       if (e.target.value !== '') this.addCard(e);
@@ -92,7 +107,6 @@ var ListsView = Backbone.View.extend({
     this.$el.html(this.listsTemplate({ lists: this.collection.toJSON() }));
     this.collection.forEach(list => this.renderCards(list));
     this.setCardDrags();
-    this.setCardWidth();
   }, // DRAGULA //
   setCardDrags: function() {
     this.cardDrags = dragula($('.cards').toArray(), {direction: 'vertical'});

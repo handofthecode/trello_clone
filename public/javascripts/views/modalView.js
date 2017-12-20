@@ -7,7 +7,7 @@ var modalView = Backbone.View.extend({
     'click .no_description': 'showForm',
     'click .cancel': 'close',
     'click .edit': 'showForm',
-    'click .cancelEdit': 'cancel'  
+    'blur textarea': 'cancel'  
   },
   close: function() {
     this.$modal.hide();
@@ -27,18 +27,21 @@ var modalView = Backbone.View.extend({
   showForm: function(e) {
     this.$description.removeClass('hidden');
     this.$editToggles.hide();
-    this.$descriptionText.focus();
+    this.$descriptionText.val($('p.edit').text()).focus();
   },
   setDescription: function(e) {
     e.preventDefault();
+    console.log('test' + this.$descriptionText.val());
     this.listCard[1].set('description', this.$descriptionText.val());
     this.listCard[0].setCards('update');
     this.render(this.listCard);
     this.$description.addClass('hidden');
   },
-  cancel: function() {
-    this.$description.addClass('hidden');
-    this.$editToggles.show();
+  cancel: function(e) {
+    if (!$(e.relatedTarget).is('.save')) {
+      this.$description.addClass('hidden');
+      this.$editToggles.show();
+    }
   },
   render: function(listCard) {
     this.listID = listCard[0].get('id');
