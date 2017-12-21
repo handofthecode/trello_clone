@@ -22,13 +22,21 @@ var ListsView = Backbone.View.extend({
     }
   },
   openQuickEdit: function(e) {
-    console.log(e);
     e.stopPropagation();
     var $card = this.parentCard(e);
+    this.fixFormPosition($card);
     $card.addClass('editing');
     $card.find('textarea').val($card.find('h2').text()).focus().select();
   },
-
+  fixFormPosition: function($card) {
+    var $cards = $card.closest('.cards');
+    var distanceFromBottom = $(window).height() - $card.offset().top;
+    var negMargin = -$cards.scrollTop();
+    if (distanceFromBottom < 155) {
+      negMargin = distanceFromBottom - 155 + negMargin;
+    }
+    $cards.find('.renameCard').css('margin-top', negMargin);
+  },
   modal: function(e) {
     if (!this.parentCard(e).hasClass('editing')) {
       this.collection.trigger('modal', this.getListCard(e));
