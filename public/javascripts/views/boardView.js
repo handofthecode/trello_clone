@@ -6,15 +6,6 @@ var BoardView = Backbone.View.extend({
     'blur #listName': 'newListFormToggle',
     'submit #new_list_form form': 'addList'
   },
-  // isOverflow: function() {
-  //   if (e.offsetHeight < e.scrollHeight || e.offsetWidth < e.scrollWidth) {
-  //     return true;
-  //   }
-  //   return false;
-  // },
-  // checkOverflow: function() {
-  //   console.log(this.isOverflow(this.$el));
-  // },
   showModal: function(listCard) {
     this.modal.show(listCard);
   },

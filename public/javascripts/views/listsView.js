@@ -5,7 +5,7 @@ var ListsView = Backbone.View.extend({
   events: {
     'click .card_form_toggle': 'newCardFormToggle',
     'click .cancel': 'hideCardForm',
-    'blur textarea': 'hideCardForm',
+    'blur .new_card_form textarea': 'hideCardForm',
     'keypress .new_card_form textarea': 'handleNewCardEnter',
     'submit .new_card_form form': 'addCard',
     'submit .renameList': 'renameList',
@@ -24,11 +24,11 @@ var ListsView = Backbone.View.extend({
   openQuickEdit: function(e) {
     e.stopPropagation();
     var $card = this.parentCard(e);
-    this.fixFormPosition($card);
+    this.fixQuickEditPosition($card);
     $card.addClass('editing');
     $card.find('textarea').val($card.find('h2').text()).focus().select();
   },
-  fixFormPosition: function($card) {
+  fixQuickEditPosition: function($card) {
     var $cards = $card.closest('.cards');
     var distanceFromBottom = $(window).height() - $card.offset().top;
     var negMargin = -$cards.scrollTop();
@@ -88,7 +88,7 @@ var ListsView = Backbone.View.extend({
   addCard: function(e) {
     e.preventDefault();
     var listID = this.getListID(e);
-    var title = $(e.target).closest('.list').find('textarea').val();
+    var title = this.parentList(e).find('.new_card_form textarea').val();
     var list = this.collection.get(listID);
     list.cards.add({title: title, id: this.collection.cardSerial++}, {silent: true});
     list.setCards('update');
@@ -101,7 +101,8 @@ var ListsView = Backbone.View.extend({
   },
   showCardForm: function(e) {
     var $list = this.parentList(e);
-    $list.find('.cards').addClass('long');
+    var cards = $list.find('.cards').addClass('long')[0];
+    cards.scrollBy(cards.innerHeight);
     $list.find('.card_form_toggle').hide();
     return $list.find('.new_card_form').show();
   },
@@ -161,7 +162,7 @@ var ListsView = Backbone.View.extend({
   },
   renderCards: function(list) {
     var $el = this.getListByID(list.get('id')).find('.cards')
-    $el.html(this.cardsTemplate({ cards: list.cards.toJSON() }));
+    $el.html(this.cardsTemplate({ cards: list.get('cards') }));
   },
   initialize: function(lists) {
     this.collection = lists;
