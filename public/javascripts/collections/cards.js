@@ -1,14 +1,17 @@
 var List = Backbone.Model.extend({
-  setCards: function(trigger) {
-    this.set('cards', this.cards.toJSON());
-    if (trigger) this.collection.trigger('update');
+  url: function() {
+    return 'lists/' + this.get('id');
   },
   initialize: function(list) {
     this.cards = new Cards(list.cards);
-    // this.listenTo(this.cards, 'update change reset add', this.updateLists.bind(this))
+    this.cards.listID = this.id;
+  },
+  toJSON: function() {
+    var json = _.clone(this.attributes);
+    json.cards = this.cards.toJSON();
+    return json;
   }
 });
-
 var Cards = Backbone.Collection.extend({
   model: Card
 })

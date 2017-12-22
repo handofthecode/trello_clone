@@ -1,0 +1,17 @@
+{{#if description}}
+<form class="renameCard">
+	<textarea></textarea>
+		<div class="icon_description"></div>
+	<input type="submit" value="Save">
+</form>
+<div class="tint"></div>
+<h2>{{title}}</h2><span class="icon_pencil"></span>
+<div class="icon_description"></div>
+{{else}}
+<form class="renameCard">
+	<textarea></textarea>
+	<input type="submit" class="no_margin" value="Save">
+</form>
+<div class="tint"></div>
+<h2>{{title}}</h2><span class="icon_pencil"></span>
+{{/if}}

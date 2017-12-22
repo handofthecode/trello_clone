@@ -21,7 +21,8 @@ var modalView = Backbone.View.extend({
   renameCard: function(e) {
     e.preventDefault();
     this.listCard[1].set('title', this.$title.val());
-    this.listCard[0].setCards('update');
+    Backbone.sync('create', this.listCard[1]);
+    this.collection.trigger('update');
     this.$title.blur();
   },
   showForm: function(e) {
@@ -31,9 +32,9 @@ var modalView = Backbone.View.extend({
   },
   setDescription: function(e) {
     e.preventDefault();
-    console.log('test' + this.$descriptionText.val());
     this.listCard[1].set('description', this.$descriptionText.val());
-    this.listCard[0].setCards('update');
+    Backbone.sync('create', this.listCard[1]);
+    this.collection.trigger('update');
     this.render(this.listCard);
     this.$description.addClass('hidden');
   },
@@ -49,7 +50,7 @@ var modalView = Backbone.View.extend({
     this.listCard = listCard;
     var modalData = listCard[1].toJSON();
     modalData.listTitle = listCard[0].get('title');
-    this.$modal.html(this.template( modalData ));
+    this.$modal.html(this.template(modalData));
     this.cacheDOM();
   },
   cacheDOM: function() {

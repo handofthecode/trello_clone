@@ -200,6 +200,9 @@ input[type='submit']:hover {
 .card:hover {
   background-color: #edeff0;
 }
+.card:hover .icon_pencil {
+  display: inline-block;
+}
 .card .icon_description {
   padding: 5px 0 15px 5px;
   background: url("../images/description.png") no-repeat 12px 0/12px 12px;
@@ -214,7 +217,7 @@ input[type='submit']:hover {
   display: inline-block;
 }
 .card .icon_pencil {
-  display: inline-block;
+  display: none;
   height: 10px;
   width: 10px;
   padding: 5px;

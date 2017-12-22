@@ -6,10 +6,10 @@
 	</form>
 	<h3>in list <a>{{listTitle}}</a></h3>
 	{{#unless description}}
-		<h3 class="no_description edit" class="edit"><a>Edit the description...</a></h3>
+	<h3 class="no_description edit" class="edit"><a>Edit the description...</a></h3>
 	{{else}}
-			<h3>Description <a class="edit" class="toggle_form">Edit</a></h3>
-			<p class="edit">{{description}}</p>
+	<h3>Description <a class="edit" class="toggle_form">Edit</a></h3>
+	<p class="edit">{{description}}</p>
 	{{/unless}}
 	<form class="description hidden">
 		<textarea placeholder="Add a more detailed description...">{{description}}</textarea>

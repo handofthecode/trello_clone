@@ -1,7 +1,7 @@
 this["JST"] = this["JST"] || {};
 
 this["JST"]["board"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div id=\"modal_wrap\">	<div id=\"tint\" class=\"cancel\"></div>	<div id=\"modal\"></div></div><div id=\"lists\">	</div><div class=\"board_item\">	<div id=\"new_list_form\">		<form>			<input type=\"text\" id=\"listName\" placeholder=\"Add a list...\">			<input type=\"submit\" value=\"Save\" class=\"save\">			<div id=\"cancel\">x</div>		</form>	</div><div id=\"list_form_toggle\">Add a list...</div></div>";
+    return "<div id=\"modal_wrap\">	<div id=\"tint\" class=\"cancel\"></div>	<div id=\"modal\"></div></div><div id=\"lists\">	</div><div class=\"board_item\">	<div id=\"new_list_form\">		<form>			<input type=\"text\" id=\"listName\" autocomplete=\"off\" placeholder=\"Add a list...\">			<input type=\"submit\" value=\"Save\" class=\"save\">			<div id=\"cancel\">x</div>		</form>	</div><div id=\"list_form_toggle\">Add a list...</div></div>";
 },"useData":true});
 
 this["JST"]["card"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -46,11 +46,11 @@ this["JST"]["list"] = Handlebars.template({"1":function(container,depth0,helpers
 },"useData":true});
 
 this["JST"]["modal"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "		<h3 class=\"no_description edit\" class=\"edit\"><a>Edit the description...</a></h3>	";
+    return "	<h3 class=\"no_description edit\" class=\"edit\"><a>Edit the description...</a></h3>	";
 },"3":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "			<h3>Description <a class=\"edit\" class=\"toggle_form\">Edit</a></h3>			<p class=\"edit\">"
+  return "	<h3>Description <a class=\"edit\" class=\"toggle_form\">Edit</a></h3>	<p class=\"edit\">"
     + container.escapeExpression(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"description","hash":{},"data":data}) : helper)))
     + "</p>	";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -65,6 +65,24 @@ this["JST"]["modal"] = Handlebars.template({"1":function(container,depth0,helper
     + "	<form class=\"description hidden\">		<textarea placeholder=\"Add a more detailed description...\">"
     + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
     + "</textarea>		<input type=\"submit\" value=\"Save\" class=\"save\">		<div class=\"cancelEdit\">X</div>	</form></section>";
+},"useData":true});
+
+this["JST"]["one_card"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "<form class=\"renameCard\">	<textarea></textarea>		<div class=\"icon_description\"></div>	<input type=\"submit\" value=\"Save\"></form><div class=\"tint\"></div><h2>"
+    + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"title","hash":{},"data":data}) : helper)))
+    + "</h2><span class=\"icon_pencil\"></span><div class=\"icon_description\"></div>";
+},"3":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "<form class=\"renameCard\">	<textarea></textarea>	<input type=\"submit\" class=\"no_margin\" value=\"Save\"></form><div class=\"tint\"></div><h2>"
+    + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"title","hash":{},"data":data}) : helper)))
+    + "</h2><span class=\"icon_pencil\"></span>";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.description : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "");
 },"useData":true});
 
 this["JST"]["search"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
