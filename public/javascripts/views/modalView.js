@@ -7,6 +7,7 @@ var modalView = Backbone.View.extend({
     'click .no_description': 'showForm',
     'click .cancel': 'close',
     'click .edit': 'showForm',
+    'blur .rename input[type="text"]': 'renameCard',
     'blur textarea': 'cancel'  
   },
   close: function() {
@@ -19,11 +20,16 @@ var modalView = Backbone.View.extend({
     this.$tint.show();
   },
   renameCard: function(e) {
-    e.preventDefault();
-    this.listCard[1].set('title', this.$title.val());
-    Backbone.sync('create', this.listCard[1]);
-    this.collection.trigger('update');
-    this.$title.blur();
+    if (e.target.nodeName === 'FORM') {
+      e.preventDefault();
+      this.$title.blur();
+    }
+    var title = this.$title.val();
+    if (title) {
+      this.listCard[1].set('title', title);
+      Backbone.sync('update', this.listCard[1]);
+      this.collection.trigger('renderCards', this.listCard[0]);
+    }
   },
   showForm: function(e) {
     this.$description.removeClass('hidden');
@@ -33,10 +39,11 @@ var modalView = Backbone.View.extend({
   setDescription: function(e) {
     e.preventDefault();
     this.listCard[1].set('description', this.$descriptionText.val());
-    Backbone.sync('create', this.listCard[1]);
-    this.collection.trigger('update');
+    Backbone.sync('update', this.listCard[1]);
+    this.collection.trigger('renderCards', this.listCard[0]);
     this.render(this.listCard);
     this.$description.addClass('hidden');
+
   },
   cancel: function(e) {
     if (!$(e.relatedTarget).is('.save')) {

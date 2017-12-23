@@ -42,17 +42,16 @@ router.route('/board').get(function(req, res) {
   saveData(data);
   res.end();
 });
-
+// Drag Lists
 router.route('/lists').put(function(req, res) {
   var data = getData();
   var lists = data.lists;
-  var origList, destList, card, idx, i;
-  [origList, destList, card, idx] = JSON.parse(Object.keys(req.body)[0]);
-  origList = _.findWhere(lists, {id: origList});
-  destList = _.findWhere(lists, {id: destList});
-  i = origList.cards.findIndex(el => card === el.id)
-  card = origList.cards.splice(i, 1)[0];
-  destList.cards.splice(idx, 0, card);
+  var list1, idx1, list2, idx2;
+  [list1, idx1, list2, idx2] = JSON.parse(Object.keys(req.body)[0]);
+  list1 = _.findWhere(lists, {id: list1});
+  list2 = _.findWhere(lists, {id: list2});
+  card = list1.cards.splice(idx1, 1)[0];
+  idx2 === -1 ? list2.cards.push(card) : list2.cards.splice(idx2, 0, card);
   saveData(data);
   res.end();
 });

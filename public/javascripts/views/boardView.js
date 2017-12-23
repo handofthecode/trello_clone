@@ -3,7 +3,8 @@ var BoardView = Backbone.View.extend({
 	el: '#board',
   events: {
     'click #list_form_toggle': 'newListFormToggle',
-    'click #cancel': 'newListFormClose',
+    'mousedown': 'handleNewListClicks',
+    'keydown #listName': 'handleNewListKeyDown',
     'submit #new_list_form form': 'addList'
   },
   showModal: function(listCard) {
@@ -18,11 +19,22 @@ var BoardView = Backbone.View.extend({
     this.newListForm.slideDown(40);
     this.listName.focus();
   },
-  newListFormClose: function(e) {
-    setTimeout(function(){
-      this.listFormToggle.slideDown(40);
-      this.newListForm.slideUp(40);
-    }.bind(this), 1);
+  handleNewListKeyDown: function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (e.target.value !== '') this.addList(e);
+    } else if (e.key === 'Escape') {
+      this.newListFormClose();
+    }
+  },
+  handleNewListClicks: function(e) {
+    if (e.target.id !== 'listName' && !e.target.classList.contains('save')) {
+      this.newListFormClose();
+    }
+  },
+  newListFormClose: function() {
+    this.listFormToggle.slideDown(40);
+    this.newListForm.slideUp(40);
   },
   addList: function(e) {
     e.preventDefault();
@@ -31,17 +43,20 @@ var BoardView = Backbone.View.extend({
         title: this.listName.val(),
         id: this.collection.listSerial++
       });
-      Backbone.sync('create', this.collection.at(-1));
+      var list = this.collection.at(-1);
+      Backbone.sync('create', list);
+      this.listsView.appendList(list);
     }
     this.listName.val('');
     this.listName.focus();
+    this.listsView.setCardDrags();
   },
   update: function(e) {
+    console.log('...reflowing...');
     this.listsView.render();
-    // this.collection.saveData();
   },
   registerListeners: function() {
-    this.listenTo(this.collection, 'update reset change:title', this.update.bind(this));
+    this.listenTo(this.collection, 'reset', this.update.bind(this));
     this.listenTo(this.collection, 'modal', this.showModal.bind(this));
   },
   render: function() {

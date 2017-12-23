@@ -3,11 +3,11 @@ var Lists = Backbone.Collection.extend({
   cardSerial: 1,
   model: List,
   url: '/board',
-  saveCardMove(origList, destList, card, idx) {
+  saveCardMove(list1, idx1, list2, idx2) {
     $.ajax({
       url: '/lists',
       method: 'PUT',
-      data: JSON.stringify([origList, destList, card, idx]),
+      data: JSON.stringify([list1, idx1, list2, idx2]),
       dataType: 'json'
     });
   },
