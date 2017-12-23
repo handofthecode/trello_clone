@@ -18,8 +18,10 @@ var SearchView = Backbone.View.extend({
     return [list, card];
   },
   hideResults: function() {
-    this.$results.slideUp(40);
-    this.$input.val('');
+    setTimeout(function() {
+      this.$results.slideUp(40);
+      this.$input.val('');
+    }.bind(this), 60)
   },
   renderResults: function() {
     var query = this.$input.val().toLowerCase();

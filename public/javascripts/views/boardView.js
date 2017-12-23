@@ -52,7 +52,6 @@ var BoardView = Backbone.View.extend({
     this.listsView.setCardDrags();
   },
   update: function(e) {
-    console.log('...reflowing...');
     this.listsView.render();
   },
   registerListeners: function() {
