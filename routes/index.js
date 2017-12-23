@@ -33,7 +33,7 @@ router.route('/board').get(function(req, res) {
   var allData = Object.keys(req.body)[0];
   fs.writeFileSync(filePath, allData, 'utf8');
   res.send('200');
-}).put(function(req, res) {
+}).put(function(req, res) { // Drag List
   var data = getData();
   var lists = data.lists;
   var order = JSON.parse(Object.keys(req.body)[0]);
@@ -42,7 +42,7 @@ router.route('/board').get(function(req, res) {
   saveData(data);
   res.end();
 });
-// Drag Lists
+// Drag Card
 router.route('/lists').put(function(req, res) {
   var data = getData();
   var lists = data.lists;

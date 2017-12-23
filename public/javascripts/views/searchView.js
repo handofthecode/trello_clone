@@ -19,9 +19,9 @@ var SearchView = Backbone.View.extend({
   },
   hideResults: function() {
     setTimeout(function() {
-      this.$results.slideUp(40);
+      this.$results.slideUp(20);
       this.$input.val('');
-    }.bind(this), 60)
+    }.bind(this), 50)
   },
   renderResults: function() {
     var query = this.$input.val().toLowerCase();

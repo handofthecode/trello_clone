@@ -7,7 +7,6 @@ var List = Backbone.Model.extend({
     this.cards.listID = this.id;
   },
   toJSON: function() {
-    console.log('jsoning around...')
     var json = _.clone(this.attributes);
     json.cards = this.cards.toJSON();
     return json;

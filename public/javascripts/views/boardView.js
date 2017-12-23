@@ -51,11 +51,11 @@ var BoardView = Backbone.View.extend({
     this.listName.focus();
     this.listsView.setCardDrags();
   },
-  update: function(e) {
+  renderLists: function(e) {
     this.listsView.render();
   },
   registerListeners: function() {
-    this.listenTo(this.collection, 'reset', this.update.bind(this));
+    this.listenTo(this.collection, 'reset', this.renderLists.bind(this));
     this.listenTo(this.collection, 'modal', this.showModal.bind(this));
   },
   render: function() {

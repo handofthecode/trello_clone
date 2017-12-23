@@ -57,17 +57,17 @@ body header #search input {
   left: 10px;
   position: fixed;
   padding: 5px;
-  background-color: #4c92c0;
+  background: url("../images/search.png") #4c92c0 no-repeat 140px 3px/18px 18px;
   outline: none;
   border: none;
   border-radius: 2px;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 body header #search input:hover {
   background-color: #66a2c9;
 }
 body header #search input:focus {
-  background-color: #fff;
+  background: url("../images/search.png") #fff no-repeat 190px 3px/18px 18px;
   width: 200px;
 }
 #board {
