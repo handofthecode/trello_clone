@@ -7,8 +7,7 @@ var ListsView = Backbone.View.extend({
   events: {
     'click .card_form_toggle': 'newCardFormToggle',
     'blur .new_card_form textarea': 'hideCardForm',
-    'mousepress': 'closeForms',
-    'click .cancel': 'hideCardForm',
+    'mousedown': 'closeCardForm',
     'keydown .new_card_form textarea': 'handleNewCardKeyPress',
     'submit .new_card_form form': 'addCard',
     'submit .renameList': 'renameList',
@@ -111,7 +110,7 @@ var ListsView = Backbone.View.extend({
       }
     }.bind(this), 80);
   },
-  closeForms: function(e) {
+  closeCardForm: function(e) {
     if (e.target.classList.contains('save') ||
         e.target.classList.contains('card_form_toggle') ||
         e.target.classList.contains('nameInput')) {
