@@ -30,13 +30,13 @@ router.get('/', function(req, res, next) {
 router.route('/board').get(function(req, res) {
   res.json(getData());
 }).post(function(req, res) {
-  var allData = Object.keys(req.body)[0];
+  var allData = req.body;
   fs.writeFileSync(filePath, allData, 'utf8');
   res.send('200');
 }).put(function(req, res) { // Drag List
   var data = getData();
   var lists = data.lists;
-  var order = JSON.parse(Object.keys(req.body)[0]);
+  var order = req.body;
   var result = order.map(el => _.where(lists, {id: el})[0]);
   data.lists = result;
   saveData(data);
@@ -47,7 +47,7 @@ router.route('/lists').put(function(req, res) {
   var data = getData();
   var lists = data.lists;
   var list1, idx1, list2, idx2;
-  [list1, idx1, list2, idx2] = JSON.parse(Object.keys(req.body)[0]);
+  [list1, idx1, list2, idx2] = req.body;
   list1 = _.findWhere(lists, {id: list1});
   list2 = _.findWhere(lists, {id: list2});
   card = list1.cards.splice(idx1, 1)[0];

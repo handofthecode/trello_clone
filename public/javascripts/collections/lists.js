@@ -8,7 +8,7 @@ var Lists = Backbone.Collection.extend({
       url: '/lists',
       method: 'PUT',
       data: JSON.stringify([list1, idx1, list2, idx2]),
-      dataType: 'json'
+      contentType: "application/json; charset=utf-8"
     });
   },
   saveListMove() {
@@ -16,7 +16,7 @@ var Lists = Backbone.Collection.extend({
       url: this.url,
       method: 'PUT',
       data: JSON.stringify(this.map(list => list.id)),
-      dataType: 'json'
+      contentType: "application/json; charset=utf-8"
     });
   },
   loadData: function() {
