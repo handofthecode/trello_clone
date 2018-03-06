@@ -1,8 +1,11 @@
 This is a Trello Clone
 
-Tools:
-The front-end is built on backbone using handlebars templates.
-The back-end relies on express and json.
+Purpose: This project was built from scratch over a 15 day period. My goal was to replicate the Trello UI and functionality within the allotted time.
+
+Approach:
+The front-end is built on backbone and uses handlebars templating.
+The back-end relies on express and a simple json file to store nested data.
+Download the Trello Clone Presentation.pdf for more details.
 
 Features:
 You can create lists and populate them with cards.
